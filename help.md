@@ -65,14 +65,44 @@ php artisan breeze:install
 
 ```sh
 composer install
+```
+Letölti és telepíti a PHP függőségeket a `composer.json` és `composer.lock` alapján a `vendor/` mappába.
+
+```sh
 npm i
+```
+Letölti és telepíti a frontend (Node.js) függőségeket a `package.json` alapján a `node_modules/` mappába.
+
+```sh
 cp .env.example .env
+```
+Lemásolja a konfigurációs sablont `.env` néven, amelyben a helyi környezet beállításai találhatók.
+
+```sh
 php artisan key:generate
+```
+Generál egy egyedi alkalmazáskulcsot (`APP_KEY`) a `.env` fájlba.
+
+```sh
 php artisan migrate
+```
+Lefuttatja az adatbázis migrációkat, és létrehozza a szükséges táblákat.
+
+```sh
 php artisan db:seed
+```
+Feltölti az adatbázist kezdeti adatokkal a seederek alapján.
+
+```sh
 php artisan storage:link
+```
+Létrehoz egy szimbolikus linket a `public/storage` és a `storage/app/public` között.
+
+```sh
 composer run dev
 ```
+Elindítja a fejlesztői környezetet (Laravel szerver + Vite).
+
 ## Artisan parancsok
 
 ### Modellek és migrációk generálása
