@@ -174,3 +174,18 @@ Migrációk tiszta lappal és DatabaseSeeder.php futtatása:
 php artisan migrate:fresh --seed
 ```
 
+### Vezérlők generálása
+
+Új vezérlő:
+
+```sh
+php artisan make:controller
+```
+
+(Névkonvenció: pl. `FooController` - empty vagy resource típusú kontroller generálása ajánlott.)
+
+Resource vezérlő adott modell fölött egy paranccsal:
+
+```sh
+php artisan make:controller FooController -r Foo
+```
