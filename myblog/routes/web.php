@@ -5,6 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 
 Route::get('/', [PostController::class, 'index'])->name('posts.index');
+//A következő 2 sor sorrendje fontos. A router felülről lefelé nézi a route-okat, és az első illeszkedőt használja (mintaillesztés). A /posts/create URL illeszkedik a /posts/{post} mintára is. {post} = "create", megpróbál egy Post modellt keresni "create" azonosítóval. Nem talál, ezért 404 lesz. A konkrétabb route legyen előbb.
+Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+
 
 
 Route::get('/dashboard', function () {
