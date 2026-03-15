@@ -62,4 +62,28 @@ class PostController extends Controller
         //visszairányít a postlistára, elkerüli az űrlap újraküldését, pl F5 többszöri lenyomásakor
         return redirect()->route('posts.index');
     }
+    public function edit(Post $post)
+    {
+        return view('posts.edit', [
+            'users' => User::all(),
+            'categories' => Category::all(),
+            'post' => $post
+        ]);
+    }
+    public function update(Request $request, Post $post)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string',
+            'content' => 'required|string|min:10',
+            'author_id' => 'required|integer|exists:users,id',
+            'categories' => 'array',
+            'categories.*' => 'integer|distinct|exists:categories,id'
+        ], [
+            'content.min' => 'A tartalom legalább 10 karakter kell legyen!'
+        ]);
+        $validated['is_public'] = $request->has('is_public');
+        $post->update($validated);
+        $post->categories()->sync($validated['categories'] ?? []);
+        return redirect()->route('posts.index');
+    }
 }
